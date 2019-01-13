@@ -1,0 +1,11 @@
+{
+  "name": "python-todo-tmp",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "serverless": "^1.32.0"
+  },
+  "devDependencies": {
+    "serverless-python-requirements": "^4.2.5"
+  }
+}

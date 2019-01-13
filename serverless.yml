@@ -1,0 +1,45 @@
+service: pythontodotmp
+
+provider:
+  name: aws
+  stage: dev
+  profile: bit-dev
+  runtime: python3.6
+  versionFunctions: false
+  deploymentBucket:
+    name: bit-${self:provider.stage}-artifacts
+  environment:
+    DYNAMODB_TABLE: ${self:custom.serviceName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: { Fn::GetAtt: [ TodoDynamoDBTable, Arn ] }
+
+functions:
+  hello:
+    handler: lambdas/handler.hello
+  create:
+    handler: lambdas/create.handler
+    events:
+      - http:
+          path: todos
+          method: post
+  list:
+    handler: lambdas/list.handler
+    events:
+      - http:
+          path: todos
+          method: get
+  delete:
+    handler: lambdas/delete.handler
+    events:
+      - http:
+          path: todos/{id}
+          method: delete
+
+resources:
+  - ${file(resources.yml)}
+
+custom:
+  serviceName: ${self:provider.stage}-${self:service}
