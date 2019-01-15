@@ -38,6 +38,15 @@ functions:
           path: todos/{id}
           method: delete
 
+  token_exchange:
+    handler: lambdas/token_exchange.handler
+    environment:
+      jwt_token: ${ssm:todo_jwt_secret}
+    events:
+      - http:
+          path: token/exchange
+          method: post
+
 resources:
   - ${file(resources.yml)}
 

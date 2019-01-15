@@ -43,7 +43,7 @@ def handler(event, context):
 
     # create a response
     response = {
-        "statusCode": 200,
+        "statusCode": 201,
         "body": json.dumps(item),
         "headers": {
             "Content-Type": "application/json"

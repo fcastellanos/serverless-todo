@@ -1,0 +1,31 @@
+Generate JWT secret with Python secrets library like:
+https://docs.python.org/3/library/secrets.htmls
+```
+import secrets
+
+secrets.token_hex(64)
+```
+
+Encode / Decode JWT token like:
+https://pyjwt.readthedocs.io/en/latest/
+```
+import jwt
+
+secret = '7d3de218a40f2ebf93920fbb6c44ad8720125d8ae253b042a111508d70db57c1efa755b62604b48492c3a973363b7a72a83bd43ebc713d7dfd1c6a82afc3c726'
+
+encoded_jwt = jwt.encode({'some': 'payload'}, secret, algorithm='HS256')
+
+jwt.decode(encoded_jwt, 'secret', algorithms=['HS256'])
+```
+
+To call a protected API Endpoint you need to send the headers like
+```
+Authorization: Token token=token
+```
+
+Requirements:
+moto==1.3.4
+boto3==1.7.84
+
+To run tests:
+python -m pytest tests/test_create.py --disable-pytest-warnings
