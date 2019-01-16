@@ -4,7 +4,11 @@ python:
   - '3.6'
 
 env:
-  - BOTO_CONFIG=/dev/null
+  global:
+    - BOTO_CONFIG=/dev/null
+    - AWS_ACCESS_KEY_ID=dummy-access-key
+    - AWS_SECRET_ACCESS_KEY=dummy-access-key-secret
+    - AWS_DEFAULT_REGION=us-east-1
 
 install:
   - python -m pip install -r requirements-test.txt
