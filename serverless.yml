@@ -52,6 +52,8 @@ functions:
           method: post
   jwt_simple_auth:
     handler: lambdas/jwt_simple.handler
+    environment:
+      todo_jwt_secret: ${ssm:todo_jwt_secret}
     memorySize: 128 # MB
     timeout: 6 # Seconds
 
