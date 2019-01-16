@@ -41,7 +41,7 @@ functions:
   token_exchange:
     handler: lambdas/token_exchange.handler
     environment:
-      jwt_token: ${ssm:todo_jwt_secret}
+      todo_jwt_secret: ${ssm:todo_jwt_secret}
     events:
       - http:
           path: token/exchange
@@ -50,5 +50,10 @@ functions:
 resources:
   - ${file(resources.yml)}
 
+plugins:
+  - serverless-python-requirements
+
 custom:
   serviceName: ${self:provider.stage}-${self:service}
+  pythonRequirements:
+    dockerizePip: true
