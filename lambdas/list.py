@@ -1,7 +1,7 @@
 import boto3
 import json
 import os
-import lambdas.decimalencoder
+import lambdas.decimalencoder as decimalencoder
 
 dynamodb = boto3.resource('dynamodb')
 
