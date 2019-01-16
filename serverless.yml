@@ -42,6 +42,11 @@ functions:
       - http:
           path: todos/{id}
           method: delete
+          authorizer:
+            name: jwt_simple_auth
+            resultTtlInSeconds: 6
+            identitySource: method.request.header.Authorization
+            type: token
   token_exchange:
     handler: lambdas/token_exchange.handler
     environment:
