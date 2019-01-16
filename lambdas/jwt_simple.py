@@ -45,4 +45,4 @@ def handler(event, context):
     # Finally, build the policy
     authResponse = policy.build()
 
-    return authResponseb
+    return authResponse
