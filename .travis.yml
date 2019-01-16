@@ -4,7 +4,8 @@ python:
   - '3.6'
 
 install:
-  - pip install -r requirements-test.txt
+  - python -m pip install -r requirements-test.txt
+  - python -m pip list
 
 script:
   - python -m pytest tests/
