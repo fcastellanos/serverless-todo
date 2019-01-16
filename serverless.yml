@@ -25,6 +25,11 @@ functions:
       - http:
           path: todos
           method: post
+          authorizer:
+            name: jwt_simple_auth
+            resultTtlInSeconds: 6
+            identitySource: method.request.header.Authorization
+            type: token
   list:
     handler: lambdas/list.handler
     events:
@@ -37,7 +42,6 @@ functions:
       - http:
           path: todos/{id}
           method: delete
-
   token_exchange:
     handler: lambdas/token_exchange.handler
     environment:
@@ -46,6 +50,10 @@ functions:
       - http:
           path: token/exchange
           method: post
+  jwt_simple_auth:
+    handler: lambdas/jwt_simple.handler
+    memorySize: 128 # MB
+    timeout: 6 # Seconds
 
 resources:
   - ${file(resources.yml)}
