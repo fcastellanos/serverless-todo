@@ -9,7 +9,7 @@ from lambdas.http_verb import HttpVerb
 from lambdas.auth_policy import AuthPolicy
 
 # NOTE: For more info on lambda authorizers go to
-#  https://github.com/awslabs/aws-apigateway-lambda-authorizer-blueprints
+# https://github.com/awslabs/aws-apigateway-lambda-authorizer-blueprints
 
 def handler(event, context):
     jwt_secret  = os.environ['todo_jwt_secret']
@@ -26,7 +26,7 @@ def handler(event, context):
 
     # NOTE: After the token is decoded we proceed to generate an AuthPolicy document
     # to return as the authorizer response
-    principalId = "jwt|{0}".format(auth_header.token)
+    principalId = 'jwt|{0}'.format(auth_header.token)
 
     tmp = event['methodArn'].split(':')
     apiGatewayArnTmp = tmp[5].split('/')
@@ -37,10 +37,10 @@ def handler(event, context):
     policy.region = tmp[3]
     policy.stage = apiGatewayArnTmp[1]
 
-    policy.allowMethod(HttpVerb.GET, "/*")
-    policy.allowMethod(HttpVerb.POST, "/*")
-    policy.allowMethod(HttpVerb.PUT, "/*")
-    policy.allowMethod(HttpVerb.DELETE, "/*")
+    policy.allowMethod(HttpVerb.GET, '/*')
+    policy.allowMethod(HttpVerb.POST, '/*')
+    policy.allowMethod(HttpVerb.PUT, '/*')
+    policy.allowMethod(HttpVerb.DELETE, '/*')
 
     # Finally, build the policy
     authResponse = policy.build()

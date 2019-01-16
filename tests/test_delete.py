@@ -4,7 +4,7 @@ import os
 import json
 import pytest
 
-from lambdas import create
+from lambdas import delete
 
 from sure import expect
 from moto import mock_dynamodb2
@@ -33,36 +33,21 @@ def setup_dynamodb():
         }
     )
 
-def test_successful_create():
+def test_list():
     with db_setup():
         event = {
-            'body': json.dumps({
-                	'activity_title': 'Test me',
-                	'activity_description': 'please',
-                	'date': '01-10-2019',
-                	'time': '8:00',
-                	'period': 'am'
-            })
+            'pathParameters': { 'id': 'foo-bar-baz' }
         }
 
         k = mock.patch.dict(os.environ, {'DYNAMODB_TABLE': 'test_table'})
         k.start()
 
-        response = create.handler(event, {})
+        response = delete.handler(event, {})
         response_body = json.loads(response['body'])
 
-        expected_status = 201
+        expected_status = 200
 
         k.stop()
         # pytest.set_trace()
         expect(response['statusCode']).to.equal(expected_status)
-        expect(response_body['activity_title']).to.equal('Test me')
-
-def test_validation_error():
-    event           = { 'body': json.dumps({}) }
-    response        = create.handler(event, {})
-    response_body   = json.loads(response['body'])
-    expected_status = 400
-
-    expect(response['statusCode']).to.equal(expected_status)
-    expect(response_body['message']).to.equal('Validation failed')
+        # expect(response_body['activity_title']).to.equal('Test me')

@@ -15,16 +15,15 @@ def handler(event, context):
         body = { 'message': 'Validation failed' }
 
         return {
-            "statusCode": 400,
-            "body": json.dumps(body),
-            "headers": {
-                "Content-Type": "application/json"
+            'statusCode': 400,
+            'body': json.dumps(body),
+            'headers': {
+                'Content-Type': 'application/json'
             }
         }
 
     timestamp = int(time.time() * 1000)
-
-    table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+    table     = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 
     item = {
         'id': str(uuid.uuid1()),
@@ -43,10 +42,10 @@ def handler(event, context):
 
     # create a response
     response = {
-        "statusCode": 201,
-        "body": json.dumps(item),
-        "headers": {
-            "Content-Type": "application/json"
+        'statusCode': 201,
+        'body': json.dumps(item),
+        'headers': {
+            'Content-Type': 'application/json'
         }
     }
 

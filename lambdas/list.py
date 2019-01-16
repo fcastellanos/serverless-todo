@@ -13,10 +13,10 @@ def handler(event, context):
 
     # create a response
     response = {
-        "statusCode": 200,
-        "body": json.dumps(result['Items'], cls=decimalencoder.DecimalEncoder),
-        "headers": {
-            "Content-Type": "application/json"
+        'statusCode': 200,
+        'body': json.dumps(result['Items'], cls=decimalencoder.DecimalEncoder),
+        'headers': {
+            'Content-Type': 'application/json'
         }
     }
 

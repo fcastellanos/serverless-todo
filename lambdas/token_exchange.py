@@ -9,8 +9,10 @@ def handler(event, context):
     auth_header  = AuthHeader(event['headers']['Authorization'])
 
     # NOTE: We now have access to auth_header.token
+
     # TODO: Verify token
 
+    # NOTE: We can add the user id in the payload as 'aud', name as 'name'
     payload = {
         'exp': get_expiration_hrs(1),
         'iss': 'python-tijuana',
