@@ -37,10 +37,10 @@ def handler(event, context):
         'updatedAt': timestamp,
     }
 
-    # write the todo to the database
+    # Write the todo to the database
     table.put_item(Item=item)
 
-    # create a response
+    # Create a response
     response = {
         'statusCode': 201,
         'body': json.dumps(item),
@@ -50,3 +50,5 @@ def handler(event, context):
     }
 
     return response
+
+    #  notas

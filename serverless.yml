@@ -21,6 +21,7 @@ functions:
     handler: lambdas/handler.hello
   create:
     handler: lambdas/create.handler
+    memorySize: 128 # MB
     events:
       - http:
           path: todos
@@ -71,4 +72,23 @@ plugins:
 custom:
   serviceName: ${self:provider.stage}-${self:service}
   pythonRequirements:
+    slim: true
     dockerizePip: true
+    noDeploy:
+      - pytest
+      - moto
+
+package:
+  exclude:
+    - serverless.yml
+    - requirements.txt
+    - node_modules/**
+    - resources/**
+    - resources.yml
+    - variables.yml
+    - lambdas/__pycache__/**
+    - .dockerignore
+    - Dockerfile
+    - README.md
+    - package**
+    - notes.txt

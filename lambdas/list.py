@@ -8,10 +8,10 @@ dynamodb = boto3.resource('dynamodb')
 def handler(event, context):
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 
-    # fetch all todos from the database
+    # Fetch all todos from the database
     result = table.scan()
 
-    # create a response
+    # Create a response
     response = {
         'statusCode': 200,
         'body': json.dumps(result['Items'], cls=decimalencoder.DecimalEncoder),

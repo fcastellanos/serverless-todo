@@ -5,11 +5,10 @@ import time
 from lambdas.auth_header import AuthHeader
 
 def handler(event, context):
-    jwt_secret   = os.environ['todo_jwt_secret']
-    auth_header  = AuthHeader(event['headers']['Authorization'])
+    jwt_secret  = os.environ['todo_jwt_secret']
+    auth_header = AuthHeader(event['headers']['Authorization'])
 
     # NOTE: We now have access to auth_header.token
-
     # TODO: Verify token
 
     # NOTE: We can add the user id in the payload as 'aud', name as 'name'

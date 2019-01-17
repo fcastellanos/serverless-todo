@@ -26,16 +26,15 @@ def handler(event, context):
 
     # NOTE: After the token is decoded we proceed to generate an AuthPolicy document
     # to return as the authorizer response
-    principalId = 'jwt|{0}'.format(auth_header.token)
-
-    tmp = event['methodArn'].split(':')
+    principalId      = 'jwt|{0}'.format(auth_header.token)
+    tmp              = event['methodArn'].split(':')
     apiGatewayArnTmp = tmp[5].split('/')
-    awsAccountId = tmp[4]
+    awsAccountId     = tmp[4]
 
     policy = AuthPolicy(principalId, awsAccountId)
     policy.restApiId = apiGatewayArnTmp[0]
-    policy.region = tmp[3]
-    policy.stage = apiGatewayArnTmp[1]
+    policy.region    = tmp[3]
+    policy.stage     = apiGatewayArnTmp[1]
 
     policy.allowMethod(HttpVerb.GET, '/*')
     policy.allowMethod(HttpVerb.POST, '/*')
